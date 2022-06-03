@@ -1,7 +1,9 @@
 import {useDispatch} from 'react-redux';
+import {redo, undo} from './actions';
 
 export  const EditPanel = () => {
     const dispatch=useDispatch()
+
     return (
         <div className="window edit">
             <div className="title-bar">
@@ -11,13 +13,13 @@ export  const EditPanel = () => {
                 <div className="field-row">
                     <button
                         className="button redo"
-                        onClick={()=>dispatch(redo())}
+                        onClick={()=>dispatch(undo())}
                     >
                         Undo
                     </button>
                     <button
                         className="button undo"
-                        onClick={()=>dispatch(undo())}
+                        onClick={()=>dispatch(redo())}
                     >
                         Redo
                     </button>
