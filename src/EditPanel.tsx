@@ -12,13 +12,13 @@ export  const EditPanel = () => {
             <div className="window-body">
                 <div className="field-row">
                     <button
-                        className="button redo"
+                        className="button undo"
                         onClick={()=>dispatch(undo())}
                     >
                         Undo
                     </button>
                     <button
-                        className="button undo"
+                        className="button redo"
                         onClick={()=>dispatch(redo())}
                     >
                         Redo
