@@ -1,11 +1,15 @@
 import './App.css';
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {currentStrokeSelector} from './selectors';
 import {beginStroke, endStroke, updateStroke} from './actions';
+import {drawStroke} from './canvasUtils';
 
 function App() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
+    const getCanvasWithContext = (canvas = canvasRef.current) => {
+        return {canvas, context: canvas?.getContext("2d")}
+    }
 
     const currentStroke = useSelector(currentStrokeSelector)
     const dispatch = useDispatch()
@@ -28,6 +32,16 @@ function App() {
         const {offsetX, offsetY} = nativeEvent
         dispatch(updateStroke(offsetX, offsetY))
     }
+
+    useEffect(() => {
+        const {context} = getCanvasWithContext()
+        if (!context) {
+            return
+        }
+        requestAnimationFrame(() => {
+            drawStroke(context, currentStroke.points, currentStroke.color)
+        })
+    },[currentStroke])
     return (
         <canvas
             onMouseDown={startDrawing}
