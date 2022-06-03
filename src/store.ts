@@ -8,3 +8,4 @@ const middlewareEnhancer = applyMiddleware(thunkMiddleware,logger)
 const composedEnhancers = composeWithDevTools(middlewareEnhancer)
 
 export const store = createStore(rootReducer, composedEnhancers)
+
