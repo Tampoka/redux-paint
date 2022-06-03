@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {currentStrokeSelector} from './selectors';
 import {beginStroke, endStroke, updateStroke} from './actions';
-import {drawStroke} from './canvasUtils';
+import {clearCanvas, drawStroke} from './canvasUtils';
 import {ColorPanel} from './ColorPanel';
 import './index.css';
 import {EditPanel} from './EditPanel';
@@ -37,6 +37,7 @@ function App() {
             dispatch(endStroke())
         }
     }
+
     const draw = ({nativeEvent}: React.MouseEvent<HTMLCanvasElement>) => {
         if (!isDrawing) {
             return
@@ -45,6 +46,21 @@ function App() {
 
         dispatch(updateStroke(offsetX, offsetY))
     }
+
+    useEffect(() => {
+        const { canvas, context } = getCanvasWithContext()
+        if (!context || !canvas) {
+            return
+        }
+        requestAnimationFrame(() => {
+            clearCanvas(canvas)
+
+            strokes.slice(0, strokes.length - historyIndex).forEach((stroke) => {
+                drawStroke(context, stroke.points, stroke.color)
+            })
+        })
+    }, [historyIndex])
+
     return (
         <div className="window">
             <div className="title-bar">
