@@ -1,4 +1,3 @@
-import './App.css';
 import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {currentStrokeSelector} from './selectors';
@@ -20,6 +19,16 @@ function App() {
         dispatch(beginStroke(offsetX, offsetY))
     }
 
+    useEffect(() => {
+        const {context} = getCanvasWithContext()
+        if (!context) {
+            return
+        }
+        requestAnimationFrame(() => {
+            drawStroke(context, currentStroke.points, currentStroke.color)
+        })
+    }, [currentStroke])
+
     const endDrawing = () => {
         if (isDrawing) {
             dispatch(endStroke())
@@ -30,26 +39,25 @@ function App() {
             return
         }
         const {offsetX, offsetY} = nativeEvent
+
         dispatch(updateStroke(offsetX, offsetY))
     }
-
-    useEffect(() => {
-        const {context} = getCanvasWithContext()
-        if (!context) {
-            return
-        }
-        requestAnimationFrame(() => {
-            drawStroke(context, currentStroke.points, currentStroke.color)
-        })
-    },[currentStroke])
     return (
-        <canvas
-            onMouseDown={startDrawing}
-            onMouseUp={endDrawing}
-            onMouseOut={endDrawing}
-            onMouseMove={draw}
-            ref={canvasRef}
-        />
+        <div className="window">
+            <div className="title-bar">
+                <div className="title-bar-text">Redux Paint</div>
+                <div className="title-bar-controls">
+                    <button aria-label="Close"/>
+                </div>
+            </div>
+            <canvas
+                onMouseDown={startDrawing}
+                onMouseUp={endDrawing}
+                onMouseOut={endDrawing}
+                onMouseMove={draw}
+                ref={canvasRef}
+            />
+        </div>
     )
 }
 
