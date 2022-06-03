@@ -2,10 +2,13 @@ import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {currentStrokeSelector, historyIndexSelector, isDrawingSelector, strokesSelector} from './selectors';
 import {beginStroke, endStroke, updateStroke} from './actions';
-import {clearCanvas, drawStroke} from './canvasUtils';
+import {clearCanvas, drawStroke, setCanvasSize} from './canvasUtils';
 import {ColorPanel} from './ColorPanel';
 import './index.css';
 import {EditPanel} from './EditPanel';
+
+const WIDTH = 1024
+const HEIGHT = 768
 
 function App() {
     const dispatch = useDispatch()
@@ -61,7 +64,23 @@ function App() {
                 drawStroke(context, stroke.points, stroke.color)
             })
         })
-    }, [historyIndex,strokes])
+    }, [historyIndex])
+
+    useEffect(() => {
+        const { canvas, context } = getCanvasWithContext()
+        if (!canvas || !context) {
+            return
+        }
+
+        setCanvasSize(canvas, WIDTH, HEIGHT)
+
+        context.lineJoin = "round"
+        context.lineCap = "round"
+        context.lineWidth = 5
+        context.strokeStyle = "black"
+
+        clearCanvas(canvas)
+    }, [])
 
     return (
         <div className="window">
