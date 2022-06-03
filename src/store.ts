@@ -2,8 +2,9 @@ import {rootReducer} from './rootReducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {applyMiddleware, createStore} from '@reduxjs/toolkit';
 import thunkMiddleware from "redux-thunk"
+import logger from 'redux-logger';
 
-const middlewareEnhancer = applyMiddleware(thunkMiddleware)
+const middlewareEnhancer = applyMiddleware(thunkMiddleware,logger)
 const composedEnhancers = composeWithDevTools(middlewareEnhancer)
 
-let store = createStore(rootReducer, composedEnhancers)
+export const store = createStore(rootReducer, composedEnhancers)
