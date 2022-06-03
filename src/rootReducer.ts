@@ -1,11 +1,18 @@
-import {RootState} from './types';
-import {Action, BEGIN_STROKE, END_STROKE, SET_STROKE_COLOR, UPDATE_STROKE} from './actions';
+import {
+    Action,
+    UPDATE_STROKE,
+    BEGIN_STROKE,
+    END_STROKE,
+    SET_STROKE_COLOR
+} from "./actions"
+import { RootState } from "./types"
 
 const initialState: RootState = {
-    currentStroke: {points: [], color: "#000"},
+    currentStroke: { points: [], color: "#000" },
     strokes: [],
-    historyIndex: 0
+    historyIndex:0
 }
+
 export const rootReducer = (
     state: RootState = initialState,
     action: Action
@@ -23,32 +30,34 @@ export const rootReducer = (
         case UPDATE_STROKE: {
             return {
                 ...state,
-                currentStroke: state.currentStroke,
-                points: [...state.currentStroke.points, action.payload]
+                currentStroke: {
+                    ...state.currentStroke,
+                    points: [...state.currentStroke.points, action.payload]
+                }
+            }
+        }
+        case SET_STROKE_COLOR: {
+            return {
+                ...state,
+                currentStroke: {
+                    ...state.currentStroke,
+                    ...{ color: action.payload }
+                }
             }
         }
         case END_STROKE: {
             if (!state.currentStroke.points.length) {
                 return state
             }
-            return {
+            const newState = {
                 ...state,
                 historyIndex: 0,
-                currentStroke: {...state.currentStroke, points: []},
+                currentStroke: { ...state.currentStroke, points: [] },
                 strokes: [...state.strokes, state.currentStroke]
             }
-        }
-        case SET_STROKE_COLOR:{
-            return {
-                ...state,
-                currentStroke: {
-                    ...state.currentStroke,
-                    ...{color: action.payload}
-                }
-            }
+            return newState
         }
         default:
             return state
     }
-
 }

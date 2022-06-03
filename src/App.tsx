@@ -5,6 +5,7 @@ import {beginStroke, endStroke, updateStroke} from './actions';
 import {drawStroke} from './canvasUtils';
 import {ColorPanel} from './ColorPanel';
 import './index.css';
+import {EditPanel} from './EditPanel';
 
 function App() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -53,6 +54,7 @@ function App() {
                 </div>
             </div>
             <ColorPanel/>
+            <EditPanel/>
             <canvas
                 onMouseDown={startDrawing}
                 onMouseUp={endDrawing}
