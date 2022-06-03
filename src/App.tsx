@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {currentStrokeSelector} from './selectors';
+import {currentStrokeSelector, historyIndexSelector, isDrawingSelector, strokesSelector} from './selectors';
 import {beginStroke, endStroke, updateStroke} from './actions';
 import {clearCanvas, drawStroke} from './canvasUtils';
 import {ColorPanel} from './ColorPanel';
@@ -8,15 +8,17 @@ import './index.css';
 import {EditPanel} from './EditPanel';
 
 function App() {
+    const dispatch = useDispatch()
     const canvasRef = useRef<HTMLCanvasElement>(null)
+
+    const currentStroke = useSelector(currentStrokeSelector)
+    const isDrawing = useSelector(isDrawingSelector)
+    const historyIndex=useSelector(historyIndexSelector)
+    const strokes = useSelector(strokesSelector)
+
     const getCanvasWithContext = (canvas = canvasRef.current) => {
         return {canvas, context: canvas?.getContext("2d")}
     }
-
-    const currentStroke = useSelector(currentStrokeSelector)
-    const dispatch = useDispatch()
-    const isDrawing = !!currentStroke.points.length
-
     const startDrawing = ({nativeEvent}: React.MouseEvent<HTMLCanvasElement>) => {
         const {offsetX, offsetY} = nativeEvent
         dispatch(beginStroke(offsetX, offsetY))
@@ -59,7 +61,7 @@ function App() {
                 drawStroke(context, stroke.points, stroke.color)
             })
         })
-    }, [historyIndex])
+    }, [historyIndex,strokes])
 
     return (
         <div className="window">
