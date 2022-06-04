@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {clearCanvas, drawStroke, setCanvasSize} from './canvasUtils';
+import {clearCanvas, drawStroke, setCanvasSize} from './utils/canvasUtils';
 import {ColorPanel} from './ColorPanel';
 import './index.css';
 import {EditPanel} from './EditPanel';
 import {strokesSelector} from './modules/strokes/selectors';
 import {currentStrokeSelector} from './modules/currentStroke/selectors';
 import {historyIndexSelector} from './modules/historyIndex/selectors';
-import {RootState} from './types';
-import {beginStroke, endStroke, updateStroke} from './modules/currentStroke/actions';
+import {RootState} from './utils/types';
+import {beginStroke, updateStroke} from './modules/currentStroke/actions';
 import {useCanvas} from './CanvasContext';
 import {FilePanel} from './shared/FilePanel';
+import {endStroke} from './modules/sharedActions';
 
 const WIDTH = 1024
 const HEIGHT = 768
@@ -19,18 +20,25 @@ function App() {
     const dispatch = useDispatch()
     const canvasRef = useCanvas()
 
-    const currentStroke = useSelector<RootState, RootState["currentStroke"]>(currentStrokeSelector)
     const isDrawing = useSelector<RootState>(
-        (state) => !!state.currentStroke.points.length)
-    const historyIndex = useSelector<RootState, RootState["historyIndex"]>(historyIndexSelector)
-    const strokes = useSelector<RootState, RootState["strokes"]>(strokesSelector)
+        (state) => !!state.currentStroke.points.length
+    )
+    const historyIndex = useSelector<RootState, RootState["historyIndex"]>(
+        historyIndexSelector
+    )
+    const strokes = useSelector<RootState, RootState["strokes"]>(
+        strokesSelector
+    )
+    const currentStroke = useSelector<RootState, RootState["currentStroke"]>(
+        currentStrokeSelector
+    )
 
     const getCanvasWithContext = (canvas = canvasRef.current) => {
         return {canvas, context: canvas?.getContext("2d")}
     }
     const startDrawing = ({nativeEvent}: React.MouseEvent<HTMLCanvasElement>) => {
         const {offsetX, offsetY} = nativeEvent
-        dispatch(beginStroke({x:offsetX, y:offsetY}))
+        dispatch(beginStroke({x: offsetX, y: offsetY}))
     }
 
     useEffect(() => {
@@ -45,7 +53,7 @@ function App() {
 
     const endDrawing = () => {
         if (isDrawing) {
-            dispatch(endStroke({historyIndex, stroke:currentStroke}))
+            dispatch(endStroke({historyIndex, stroke: currentStroke}))
         }
     }
 
@@ -55,7 +63,7 @@ function App() {
         }
         const {offsetX, offsetY} = nativeEvent
 
-        dispatch(updateStroke({x:offsetX, y:offsetY}))
+        dispatch(updateStroke({x: offsetX, y: offsetY}))
     }
 
     useEffect(() => {

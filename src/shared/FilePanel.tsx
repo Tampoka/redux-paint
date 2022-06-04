@@ -1,4 +1,4 @@
-import {getCanvasImage} from '../canvasUtils';
+import {getCanvasImage} from '../utils/canvasUtils';
 import {useCanvas} from '../CanvasContext';
 import {saveAs} from 'file-saver';
 

@@ -1,18 +1,16 @@
-import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import {reducer as historyIndex} from './modules/historyIndex/reducer'
-import {reducer as currentStroke} from './modules/currentStroke/reducer'
-import {reducer as strokes} from './modules/strokes/reducer'
-
-// const middlewareEnhancer = applyMiddleware(thunkMiddleware,logger)
-// const composedEnhancers = composeWithDevTools(middlewareEnhancer)
+import historyIndex from './modules/historyIndex/slice';
+import strokes from './modules/strokes/slice';
+import {currentStroke} from './modules/currentStroke/slice';
 
 const middleware = [...getDefaultMiddleware(), logger]
 export const store = configureStore({
-    reducer: combineReducers({
+    reducer: {
         historyIndex,
         currentStroke,
         strokes
-    }), middleware
+    },
+    middleware
 })
 

@@ -1,4 +1,4 @@
-import {Point, Stroke} from '../../types';
+import {Point, Stroke} from '../../utils/types';
 import {createAction} from '@reduxjs/toolkit';
 
 export const BEGIN_STROKE = "BEGIN_STROKE"

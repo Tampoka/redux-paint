@@ -1,4 +1,4 @@
-import {Stroke} from '../../types';
+import {Stroke} from '../../utils/types';
 import {createAction} from '@reduxjs/toolkit';
 
 export const END_STROKE = "END_STROKE"
