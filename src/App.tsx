@@ -30,7 +30,7 @@ function App() {
     }
     const startDrawing = ({nativeEvent}: React.MouseEvent<HTMLCanvasElement>) => {
         const {offsetX, offsetY} = nativeEvent
-        dispatch(beginStroke(offsetX, offsetY))
+        dispatch(beginStroke({x:offsetX, y:offsetY}))
     }
 
     useEffect(() => {
@@ -45,7 +45,7 @@ function App() {
 
     const endDrawing = () => {
         if (isDrawing) {
-            dispatch(endStroke(historyIndex, currentStroke))
+            dispatch(endStroke({historyIndex, stroke:currentStroke}))
         }
     }
 
@@ -55,7 +55,7 @@ function App() {
         }
         const {offsetX, offsetY} = nativeEvent
 
-        dispatch(updateStroke(offsetX, offsetY))
+        dispatch(updateStroke({x:offsetX, y:offsetY}))
     }
 
     useEffect(() => {
