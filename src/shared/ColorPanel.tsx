@@ -1,5 +1,5 @@
 import {useDispatch} from 'react-redux';
-import {setStrokeColor} from './modules/currentStroke/actions';
+import {setStrokeColor} from '../modules/currentStroke/slice';
 
 const COLORS = [
     "#000000",
@@ -53,7 +53,7 @@ export const ColorPanel = () => {
                             onColorChange(color)
                         }}
                         className="color"
-                        style={{ backgroundColor: color }}
+                        style={{backgroundColor: color}}
                     ></div>
                 ))}
             </div>

@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {endStroke} from '../sharedActions';
-import slice from '../strokes/slice';
 
 /*const initialState: RootState["historyIndex"] = 0
 
@@ -16,7 +15,7 @@ export const slice = createReducer(initialState, (builder) => {
     })
 })*/
 
- const historyIndex = createSlice({
+const historyIndex = createSlice({
     name: "historyIndex",
     initialState: 0,
     reducers: {
