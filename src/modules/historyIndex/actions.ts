@@ -1,4 +1,5 @@
 import {Stroke} from '../../types';
+import {createAction} from '@reduxjs/toolkit';
 
 export const END_STROKE = "END_STROKE"
 export const UNDO = "UNDO"
@@ -17,10 +18,11 @@ export type HistoryIndexAction =
     payload: number
 }
 
-export const redo = () => {
-    return {type: REDO}
-}
+export const redo = createAction("REDO")
 
-export const undo = (undoLimit: number) => {
-    return {type: UNDO, payload: undoLimit}
-}
+export const undo = createAction<number>("REDO")
+
+export const endStroke = createAction<{
+    stroke: Stroke
+    historyIndex: number
+}>("endStroke")

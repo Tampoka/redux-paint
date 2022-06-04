@@ -1,4 +1,5 @@
 import {Point, Stroke} from '../../types';
+import {createAction} from '@reduxjs/toolkit';
 
 export const BEGIN_STROKE = "BEGIN_STROKE"
 export const UPDATE_STROKE = "UPDATE_STROKE"
@@ -23,18 +24,13 @@ export type Action =
     payload: { stroke: Stroke; historyLimit: number }
 }
 
-export const beginStroke = (x: number, y: number) => {
-    return { type: BEGIN_STROKE, payload: { x, y } }
-}
+export const beginStroke = createAction<Point>("BEGIN_STROKE")
 
-export const updateStroke = (x: number, y: number) => {
-    return { type: UPDATE_STROKE, payload: { x, y } }
-}
+export const updateStroke = createAction<Point>("UPDATE_STROKE")
 
-export const setStrokeColor = (color: string) => {
-    return { type: SET_STROKE_COLOR, payload: color }
-}
+export const setStrokeColor = createAction<string>("SET_STROKE_COLOR")
 
-export const endStroke = (historyLimit: number, stroke: Stroke) => {
-    return { type: END_STROKE, payload: { historyLimit, stroke } }
-}
+export const endStroke = createAction<{
+    stroke: Stroke
+    historyIndex: number
+}>("endStroke")

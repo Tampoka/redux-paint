@@ -1,4 +1,5 @@
 import {Stroke} from '../../types';
+import {createAction} from '@reduxjs/toolkit';
 
 export const END_STROKE = "END_STROKE"
 
@@ -10,6 +11,6 @@ export type HistoryIndexAction = {
     type: typeof END_STROKE
     payload: { stroke: Stroke; historyLimit: number }
 }
-export const endStroke = (historyLimit: number, stroke: Stroke) => {
-    return { type: END_STROKE, payload: { historyLimit, stroke } }
-}
+export const endStroke = createAction<{
+    historyIndex: number
+    stroke: Stroke}>("endStroke")
