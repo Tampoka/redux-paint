@@ -17,6 +17,7 @@ export type Project = {
 }
 
 export type RootState = {
+    projectsList: any;
     modalVisible: ModalState;
     currentStroke: Stroke
     strokes: Stroke[]
