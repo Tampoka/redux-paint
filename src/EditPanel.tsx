@@ -1,10 +1,16 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {redo, undo} from './modules/historyIndex/actions';
 import {strokesLengthSelector} from './modules/strokes/selectors';
+import {historyIndexSelector} from './modules/historyIndex/selectors';
+import {RootState} from './types';
 
 export const EditPanel = () => {
     const dispatch = useDispatch()
     const undoLimit = useSelector(strokesLengthSelector)
+    const historyIndex = useSelector<RootState, RootState["historyIndex"]>(historyIndexSelector)
+
+    const disableUndo = historyIndex >= undoLimit
+    const disableRedo = historyIndex===0
 
     return (
         <div className="window edit">
@@ -16,12 +22,14 @@ export const EditPanel = () => {
                     <button
                         className="button undo"
                         onClick={() => dispatch(undo(undoLimit))}
+                        disabled={disableUndo}
                     >
                         Undo
                     </button>
                     <button
                         className="button redo"
                         onClick={() => dispatch(redo())}
+                       disabled={disableRedo}
                     >
                         Redo
                     </button>
