@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearCanvas, drawStroke, setCanvasSize} from './canvasUtils';
 import {ColorPanel} from './ColorPanel';
@@ -9,13 +9,15 @@ import {currentStrokeSelector} from './modules/currentStroke/selectors';
 import {historyIndexSelector} from './modules/historyIndex/selectors';
 import {RootState} from './types';
 import {beginStroke, endStroke, updateStroke} from './modules/currentStroke/actions';
+import {useCanvas} from './CanvasContext';
+import {FilePanel} from './shared/FilePanel';
 
 const WIDTH = 1024
 const HEIGHT = 768
 
 function App() {
     const dispatch = useDispatch()
-    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const canvasRef = useCanvas()
 
     const currentStroke = useSelector<RootState, RootState["currentStroke"]>(currentStrokeSelector)
     const isDrawing = useSelector<RootState>(
@@ -94,8 +96,9 @@ function App() {
                     <button aria-label="Close"/>
                 </div>
             </div>
-            <ColorPanel/>
             <EditPanel/>
+            <ColorPanel/>
+            <FilePanel/>
             <canvas
                 onMouseDown={startDrawing}
                 onMouseUp={endDrawing}
