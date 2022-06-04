@@ -10,6 +10,12 @@ export type Stroke = {
     color: string
 }
 
+export type Project = {
+    image: string;
+    name: string;
+    id: string
+}
+
 export type RootState = {
     modalVisible: ModalState;
     currentStroke: Stroke

@@ -5,6 +5,7 @@ import strokes from './modules/strokes/slice';
 import {currentStroke} from './modules/currentStroke/slice';
 import {modalVisible} from './modules/modals/slice'
 import {RootState} from './utils/types';
+import {projectsList} from './modules/projectsList/slice';
 
 
 const middleware = [...getDefaultMiddleware(), logger]
@@ -13,7 +14,8 @@ export const store = configureStore({
         historyIndex,
         currentStroke,
         strokes,
-        modalVisible
+        modalVisible,
+        projectsList
     },
     middleware
 
