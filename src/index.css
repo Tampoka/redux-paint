@@ -1,3 +1,5 @@
+@import "~xp.css/dist/XP.css";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -12,10 +14,8 @@ code {
   monospace;
 }
 
-@import "~xp.css/dist/XP.css";
-
 canvas {
-  transform: translate3d(-50%, 0, 0);
+  transform: translate(-50%, 0);
   cursor: url(./icons/pencil.png) 0 34, auto;
   margin: 100px 50%;
 }
@@ -38,7 +38,7 @@ canvas {
   position: fixed;
   top: 40px;
   left: 50%;
-  transform: translate3d(-50%, 0, 0);
+  transform: translate(-50%, 0);
   z-index: 10;
 }
 
@@ -83,7 +83,7 @@ canvas {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  transform: translate(-50%, -50%);
   z-index: 10;
 }
 
