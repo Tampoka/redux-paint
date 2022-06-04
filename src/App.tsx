@@ -1,11 +1,14 @@
 import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {currentStrokeSelector, historyIndexSelector, isDrawingSelector, strokesSelector} from './selectors';
-import {beginStroke, endStroke, updateStroke} from './actions';
 import {clearCanvas, drawStroke, setCanvasSize} from './canvasUtils';
 import {ColorPanel} from './ColorPanel';
 import './index.css';
 import {EditPanel} from './EditPanel';
+import {strokesSelector} from './modules/strokes/selectors';
+import {currentStrokeSelector} from './modules/currentStroke/selectors';
+import {historyIndexSelector} from './modules/historyIndex/selectors';
+import {RootState} from './types';
+import {beginStroke, endStroke, updateStroke} from './modules/currentStroke/actions';
 
 const WIDTH = 1024
 const HEIGHT = 768
@@ -14,10 +17,11 @@ function App() {
     const dispatch = useDispatch()
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
-    const currentStroke = useSelector(currentStrokeSelector)
-    const isDrawing = useSelector(isDrawingSelector)
-    const historyIndex=useSelector(historyIndexSelector)
-    const strokes = useSelector(strokesSelector)
+    const currentStroke = useSelector<RootState, RootState["currentStroke"]>(currentStrokeSelector)
+    const isDrawing = useSelector<RootState>(
+        (state) => !!state.currentStroke.points.length)
+    const historyIndex = useSelector<RootState, RootState["historyIndex"]>(historyIndexSelector)
+    const strokes = useSelector<RootState, RootState["strokes"]>(strokesSelector)
 
     const getCanvasWithContext = (canvas = canvasRef.current) => {
         return {canvas, context: canvas?.getContext("2d")}
@@ -39,7 +43,7 @@ function App() {
 
     const endDrawing = () => {
         if (isDrawing) {
-            dispatch(endStroke())
+            dispatch(endStroke(historyIndex, currentStroke))
         }
     }
 
@@ -53,7 +57,7 @@ function App() {
     }
 
     useEffect(() => {
-        const { canvas, context } = getCanvasWithContext()
+        const {canvas, context} = getCanvasWithContext()
         if (!context || !canvas) {
             return
         }
@@ -67,7 +71,7 @@ function App() {
     }, [historyIndex])
 
     useEffect(() => {
-        const { canvas, context } = getCanvasWithContext()
+        const {canvas, context} = getCanvasWithContext()
         if (!canvas || !context) {
             return
         }

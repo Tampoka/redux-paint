@@ -1,11 +1,18 @@
-import {rootReducer} from './rootReducer';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import {applyMiddleware, createStore} from '@reduxjs/toolkit';
-import thunkMiddleware from "redux-thunk"
+import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import logger from 'redux-logger';
+import {reducer as historyIndex} from './modules/historyIndex/reducer'
+import {reducer as currentStroke} from './modules/currentStroke/reducer'
+import {reducer as strokes} from './modules/strokes/reducer'
 
-const middlewareEnhancer = applyMiddleware(thunkMiddleware,logger)
-const composedEnhancers = composeWithDevTools(middlewareEnhancer)
+// const middlewareEnhancer = applyMiddleware(thunkMiddleware,logger)
+// const composedEnhancers = composeWithDevTools(middlewareEnhancer)
 
-export const store = createStore(rootReducer, composedEnhancers)
+const middleware = [...getDefaultMiddleware(), logger]
+export const store = configureStore({
+    reducer: combineReducers({
+        historyIndex,
+        currentStroke,
+        strokes
+    }), middleware
+})
 
