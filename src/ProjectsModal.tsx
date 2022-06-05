@@ -66,8 +66,7 @@ export const ProjectsModal = () => {
                             className="project-card"
                         >
                             <img src={project.image} alt="thumbnail"/>
-                            <div>{project.name}
-                            </div>
+                            <div className="title">{project.name}</div>
                             <button
                                 aria-label="Close"
                                 className="deleteButton"
