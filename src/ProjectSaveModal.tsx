@@ -1,17 +1,18 @@
 import {hide} from './modules/modals/slice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ChangeEvent, useEffect, useState} from 'react';
 import {useCanvas} from './CanvasContext';
 import {getCanvasImage} from './utils/canvasUtils';
 import {getBase64Thumbnail} from './utils/scaler';
-import {Project} from './utils/types';
 import {v1} from 'uuid';
 import {addProject, getProjectsList} from './modules/projectsList/slice';
+import {strokesSelector} from './modules/strokes/selectors';
 
 export const ProjectSaveModal = () => {
     const [projectName, setProjectName] = useState("")
     const dispatch = useDispatch()
     const canvasRef = useCanvas()
+    const strokes=useSelector(strokesSelector)
 
     const onProjectNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         setProjectName(e.target.value)
@@ -26,7 +27,8 @@ export const ProjectSaveModal = () => {
         const newProject = {
             name: projectName,
             image: thumbnail,
-            id: v1()
+            id: v1(),
+            strokes
         }
         dispatch(addProject(newProject))
         const projectsAsString = localStorage.getItem("drawings")
@@ -39,14 +41,6 @@ export const ProjectSaveModal = () => {
         dispatch(hide())
     }
 
-    useEffect(() => {
-        const projectsAsString = localStorage.getItem("drawings")
-        if (projectsAsString) {
-            const projects = JSON.parse(projectsAsString)
-            dispatch(getProjectsList(projects))
-        }
-
-    }, [])
     return (
         <div className="window modal-panel">
             <div className="title-bar">

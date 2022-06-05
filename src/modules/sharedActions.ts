@@ -5,3 +5,4 @@ export const endStroke = createAction<{
     stroke: Stroke
     historyIndex: number
 }>("endStroke")
+

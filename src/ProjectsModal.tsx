@@ -5,12 +5,19 @@ import {Project} from './utils/types';
 import {projectsListSelector} from './modules/projectsList/selectors';
 import {deleteProject, getProjectsList} from './modules/projectsList/slice';
 import {loadProject} from './modules/strokes/loadProject';
+import {setStrokes} from './modules/strokes/slice';
 
 export const ProjectsModal = () => {
     const dispatch = useDispatch()
     const projectsList = useSelector(projectsListSelector)
 
     const onLoadProject = (projectId: string) => {
+        const projectToLoad = projectsList.projects.find(project => project.id === projectId)
+        if (projectToLoad) {
+            const {strokes} = projectToLoad
+            dispatch(setStrokes(strokes))
+        }
+
         // dispatch(loadProject(projectId))
         // dispatch(hide())
     }

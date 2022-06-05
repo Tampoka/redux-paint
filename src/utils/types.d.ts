@@ -14,6 +14,7 @@ export type Project = {
     image: string;
     name: string;
     id: string
+    strokes:Stroke[]
 }
 
 export type RootState = {

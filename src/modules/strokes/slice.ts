@@ -18,7 +18,7 @@ export const slice = createReducer(initialState, (builder) => {
 
 const initialStrokes: RootState["strokes"] = []
 
- const strokes = createSlice({
+const strokes = createSlice({
     name: "strokes",
     initialState: initialStrokes,
     reducers: {
@@ -28,7 +28,7 @@ const initialStrokes: RootState["strokes"] = []
     },
     extraReducers: (builder) => {
         builder.addCase(endStroke, (state, action) => {
-            const { historyIndex, stroke } = action.payload
+            const {historyIndex, stroke} = action.payload
             if (historyIndex === 0) {
                 state.push(stroke)
             } else {
@@ -39,5 +39,5 @@ const initialStrokes: RootState["strokes"] = []
 })
 
 export default strokes.reducer
-export const { setStrokes } = strokes.actions
+export const {setStrokes} = strokes.actions
 
