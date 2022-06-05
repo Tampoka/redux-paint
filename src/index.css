@@ -36,7 +36,7 @@ canvas {
 
 .colors-panel {
     position: fixed;
-    top: 40px;
+    top: 30px;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 10;
@@ -44,14 +44,14 @@ canvas {
 
 .edit {
     position: fixed;
-    top: 40px;
+    top: 30px;
     /*left: 5%;*/
     z-index: 10;
 }
 
 .file {
     position: fixed;
-    top: 40px;
+    top: 30px;
     right: 10%;
     z-index: 10;
 }

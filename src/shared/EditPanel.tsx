@@ -3,7 +3,6 @@ import {strokesLengthSelector} from '../modules/strokes/selectors';
 import {historyIndexSelector} from '../modules/historyIndex/selectors';
 import {RootState} from '../utils/types';
 import {redo, undo} from '../modules/historyIndex/slice';
-import {clearCanvas, setCanvasSize} from '../utils/canvasUtils';
 import {resetAll} from '../modules/sharedActions';
 
 export const EditPanel = () => {
@@ -13,7 +12,8 @@ export const EditPanel = () => {
 
     const disableUndo = historyIndex >= undoLimit
     const disableRedo = historyIndex === 0
-    //
+
+
     const handleReset = () => {
         dispatch(resetAll())
     }
@@ -41,6 +41,7 @@ export const EditPanel = () => {
                     <button
                         className="button clear-all save-button"
                         onClick={handleReset}
+                        disabled={historyIndex===undoLimit}
                     >
                         Clear all
                     </button>
