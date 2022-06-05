@@ -1,6 +1,6 @@
 import {RootState, Stroke} from '../../utils/types';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {endStroke} from '../sharedActions';
+import {endStroke, resetAll} from '../sharedActions';
 
 /*
 const initialState: RootState["strokes"] = []
@@ -34,6 +34,9 @@ const strokes = createSlice({
             } else {
                 state.splice(-historyIndex, historyIndex, stroke)
             }
+        })
+        builder.addCase(resetAll, (state) => {
+            return []
         })
     }
 })

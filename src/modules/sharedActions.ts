@@ -6,3 +6,5 @@ export const endStroke = createAction<{
     historyIndex: number
 }>("endStroke")
 
+export const resetAll = createAction("resetAll")
+

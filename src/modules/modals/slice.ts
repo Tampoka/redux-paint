@@ -6,7 +6,7 @@ export type ModalState = {
 }
 
 const initialState: ModalState = {
-    isShown: true,
+    isShown: false,
     modalName: null
 };
 

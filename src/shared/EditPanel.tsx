@@ -3,6 +3,8 @@ import {strokesLengthSelector} from '../modules/strokes/selectors';
 import {historyIndexSelector} from '../modules/historyIndex/selectors';
 import {RootState} from '../utils/types';
 import {redo, undo} from '../modules/historyIndex/slice';
+import {clearCanvas, setCanvasSize} from '../utils/canvasUtils';
+import {resetAll} from '../modules/sharedActions';
 
 export const EditPanel = () => {
     const dispatch = useDispatch()
@@ -10,8 +12,11 @@ export const EditPanel = () => {
     const historyIndex = useSelector<RootState, RootState["historyIndex"]>(historyIndexSelector)
 
     const disableUndo = historyIndex >= undoLimit
-    const disableRedo = historyIndex===0
-
+    const disableRedo = historyIndex === 0
+    //
+    const handleReset = () => {
+        dispatch(resetAll())
+    }
     return (
         <div className="window edit">
             <div className="title-bar">
@@ -29,9 +34,15 @@ export const EditPanel = () => {
                     <button
                         className="button redo save-button"
                         onClick={() => dispatch(redo())}
-                       disabled={disableRedo}
+                        disabled={disableRedo}
                     >
                         Redo
+                    </button>
+                    <button
+                        className="button clear-all save-button"
+                        onClick={handleReset}
+                    >
+                        Clear all
                     </button>
                 </div>
             </div>
