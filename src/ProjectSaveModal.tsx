@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {ChangeEvent, useState} from 'react';
 import {useCanvas} from './CanvasContext';
 import {getCanvasImage} from './utils/canvasUtils';
-import {saveProject} from './modules/strokes/saveProject/thunk';
+import {saveProject} from './modules/strokes/saveProject';
 import {getBase64Thumbnail} from './utils/scaler';
 
 export const ProjectSaveModal = () => {

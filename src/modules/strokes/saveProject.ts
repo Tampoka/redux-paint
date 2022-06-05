@@ -1,5 +1,5 @@
-import {AppThunk} from '../../../store';
-import {newProject} from '../api';
+import {AppThunk} from '../../store';
+import {newProject} from './api';
 
 export const saveProject = (
     projectName:string,
