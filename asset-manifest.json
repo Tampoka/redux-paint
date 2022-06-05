@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Tampoka/redux-paint/static/css/main.60379e57.css",
-    "main.js": "/Tampoka/redux-paint/static/js/main.10c4340c.js",
-    "static/media/PerfectDOSVGA437Win.woff": "/Tampoka/redux-paint/static/media/PerfectDOSVGA437Win.86368cc9dec15d71c965.woff",
-    "static/media/PerfectDOSVGA437Win.woff2": "/Tampoka/redux-paint/static/media/PerfectDOSVGA437Win.7dc718899b215fa16aa7.woff2",
-    "static/media/ms_sans_serif.woff": "/Tampoka/redux-paint/static/media/ms_sans_serif.aac84aa6de42b83d1a62.woff",
-    "static/media/ms_sans_serif_bold.woff": "/Tampoka/redux-paint/static/media/ms_sans_serif_bold.9fbe71248995f1c639d4.woff",
-    "static/media/ms_sans_serif.woff2": "/Tampoka/redux-paint/static/media/ms_sans_serif.0348082abb503fb6a8c2.woff2",
-    "static/media/ms_sans_serif_bold.woff2": "/Tampoka/redux-paint/static/media/ms_sans_serif_bold.7fcf57cc6e87ecddbf64.woff2",
-    "index.html": "/Tampoka/redux-paint/index.html",
-    "main.60379e57.css.map": "/Tampoka/redux-paint/static/css/main.60379e57.css.map",
-    "main.10c4340c.js.map": "/Tampoka/redux-paint/static/js/main.10c4340c.js.map"
+    "main.css": "/redux-paint/static/css/main.740279cf.css",
+    "main.js": "/redux-paint/static/js/main.10c4340c.js",
+    "static/media/PerfectDOSVGA437Win.woff": "/redux-paint/static/media/PerfectDOSVGA437Win.86368cc9dec15d71c965.woff",
+    "static/media/PerfectDOSVGA437Win.woff2": "/redux-paint/static/media/PerfectDOSVGA437Win.7dc718899b215fa16aa7.woff2",
+    "static/media/ms_sans_serif.woff": "/redux-paint/static/media/ms_sans_serif.aac84aa6de42b83d1a62.woff",
+    "static/media/ms_sans_serif_bold.woff": "/redux-paint/static/media/ms_sans_serif_bold.9fbe71248995f1c639d4.woff",
+    "static/media/ms_sans_serif.woff2": "/redux-paint/static/media/ms_sans_serif.0348082abb503fb6a8c2.woff2",
+    "static/media/ms_sans_serif_bold.woff2": "/redux-paint/static/media/ms_sans_serif_bold.7fcf57cc6e87ecddbf64.woff2",
+    "index.html": "/redux-paint/index.html",
+    "main.740279cf.css.map": "/redux-paint/static/css/main.740279cf.css.map",
+    "main.10c4340c.js.map": "/redux-paint/static/js/main.10c4340c.js.map"
   },
   "entrypoints": [
-    "static/css/main.60379e57.css",
+    "static/css/main.740279cf.css",
     "static/js/main.10c4340c.js"
   ]
 }
