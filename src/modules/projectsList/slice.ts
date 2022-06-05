@@ -29,6 +29,29 @@ const slice = createSlice({
             state.error = action.payload
             state.pending = false
             state.projects = []
+        },
+        getProjectsList: (
+            state,
+            action: PayloadAction<Project[]>
+        ) => {
+            state.projects = action.payload
+        },
+        addProject: (
+            state,
+            action: PayloadAction<Project>
+        ) => {
+            state.projects.push(action.payload)
+        },
+        deleteProject: (
+            state,
+            action: PayloadAction<string>
+        ) => {
+            const projectToRemove = state.projects.find(project => project.id !== action.payload)
+            if (projectToRemove) {
+                const indexToRemove = state.projects.indexOf(projectToRemove)
+                state.projects.splice(indexToRemove, 1)
+            }
+
         }
     }
 })
@@ -36,5 +59,8 @@ const slice = createSlice({
 export const projectsList = slice.reducer
 export const {
     getProjectsListFailed,
-    getProjectsListSuccess
+    getProjectsListSuccess,
+    getProjectsList,
+    addProject,
+    deleteProject
 } = slice.actions
