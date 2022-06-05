@@ -20,14 +20,14 @@ export const EditPanel = () => {
             <div className="window-body">
                 <div className="field-row">
                     <button
-                        className="button undo"
+                        className="button undo save-button"
                         onClick={() => dispatch(undo(undoLimit))}
                         disabled={disableUndo}
                     >
                         Undo
                     </button>
                     <button
-                        className="button redo"
+                        className="button redo save-button"
                         onClick={() => dispatch(redo())}
                        disabled={disableRedo}
                     >
