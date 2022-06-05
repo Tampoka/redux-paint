@@ -1,10 +1,12 @@
 import {hide} from './modules/modals/slice';
 import {useDispatch} from 'react-redux';
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {useCanvas} from './CanvasContext';
 import {getCanvasImage} from './utils/canvasUtils';
-import {saveProject} from './modules/strokes/saveProject';
 import {getBase64Thumbnail} from './utils/scaler';
+import {Project} from './utils/types';
+import {v1} from 'uuid';
+import {addProject, getProjectsList} from './modules/projectsList/slice';
 
 export const ProjectSaveModal = () => {
     const [projectName, setProjectName] = useState("")
@@ -20,13 +22,31 @@ export const ProjectSaveModal = () => {
         if (!file) {
             return
         }
-        const thumbnail = await getBase64Thumbnail({ file, scale: 0.1 })
-        // @ts-ignore
-        dispatch(saveProject(projectName, thumbnail))
+        const thumbnail = await getBase64Thumbnail({file, scale: 0.1})
+        const newProject = {
+            name: projectName,
+            image: thumbnail,
+            id: v1()
+        }
+        dispatch(addProject(newProject))
+        const projectsAsString = localStorage.getItem("drawings")
+        if (projectsAsString) {
+            const projects = JSON.parse(projectsAsString)
+            const updatedProjects = [...projects, newProject]
+            localStorage.setItem("drawings", JSON.stringify(updatedProjects))
+        }
         setProjectName("")
         dispatch(hide())
     }
 
+    useEffect(() => {
+        const projectsAsString = localStorage.getItem("drawings")
+        if (projectsAsString) {
+            const projects = JSON.parse(projectsAsString)
+            dispatch(getProjectsList(projects))
+        }
+
+    }, [])
     return (
         <div className="window modal-panel">
             <div className="title-bar">

@@ -1,23 +1,42 @@
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {hide} from './modules/modals/slice';
 import {useEffect} from 'react';
 import {Project} from './utils/types';
-import {getProjectsList} from './modules/projectsList/getProjectsList';
+import {projectsListSelector} from './modules/projectsList/selectors';
+import {deleteProject, getProjectsList} from './modules/projectsList/slice';
 import {loadProject} from './modules/strokes/loadProject';
 
 export const ProjectsModal = () => {
     const dispatch = useDispatch()
-    const projectsList: any = []
+    const projectsList = useSelector(projectsListSelector)
 
     const onLoadProject = (projectId: string) => {
-        // @ts-ignore
-        dispatch(loadProject(projectId))
-        dispatch(hide())
+        // dispatch(loadProject(projectId))
+        // dispatch(hide())
     }
 
+    // useEffect(() => {
+    //     // @ts-ignore
+    //     dispatch(getProjectsList())
+    // }, [])
+    const handleDeleteProject = (id: string) => {
+
+        const projectsAsString = localStorage.getItem("drawings")
+        if (projectsAsString) {
+            const projects: Project[] = JSON.parse(projectsAsString)
+            const updatedProjects = projects.filter(project => project.id !== id)
+            localStorage.setItem("drawings", JSON.stringify(updatedProjects))
+        }
+        dispatch(deleteProject(id))
+    }
     useEffect(() => {
-        // @ts-ignore
-        dispatch(getProjectsList())
+        const projectsAsString = localStorage.getItem("drawings")
+        if (projectsAsString) {
+            const projects = JSON.parse(projectsAsString)
+            // @ts-ignore
+            dispatch(getProjectsList(projects))
+        }
+
     }, [])
 
     return (
@@ -40,10 +59,15 @@ export const ProjectsModal = () => {
                             className="project-card"
                         >
                             <img src={project.image} alt="thumbnail"/>
-                            <div>{project.name}</div>
-
-                            Using Redux and TypeScript 406
-
+                            <div>{project.name}
+                            </div>
+                            <button
+                                aria-label="Close"
+                                className="deleteButton"
+                                onClick={() => handleDeleteProject(project.id)}
+                            >
+                                Delete
+                            </button>
                         </div>
                     )
                 })}
