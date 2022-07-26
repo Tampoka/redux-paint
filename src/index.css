@@ -100,7 +100,7 @@ canvas {
 .project-card {
     width: 100px;
     height: 100px;
-    margin: 20px;
+    margin: 10px 20px;
     cursor: pointer;
     text-align: center;
 }
@@ -108,11 +108,13 @@ canvas {
 .project-card img {
     width: 100px;
     height: 100px;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .title {
     font-size: 12px;
     font-weight: bold;
     margin-bottom: 10px;
+    overflow: hidden;
 }
+

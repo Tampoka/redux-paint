@@ -40,13 +40,13 @@ const slice = createSlice({
             state,
             action: PayloadAction<Project>
         ) => {
-            state.projects.push(action.payload)
+            state.projects.unshift(action.payload)
         },
         deleteProject: (
             state,
             action: PayloadAction<string>
         ) => {
-            const projectToRemove = state.projects.find(project => project.id !== action.payload)
+            const projectToRemove = state.projects.find(project => project._id !== action.payload)
             if (projectToRemove) {
                 const indexToRemove = state.projects.indexOf(projectToRemove)
                 state.projects.splice(indexToRemove, 1)

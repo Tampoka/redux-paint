@@ -3,47 +3,40 @@ import {hide} from './modules/modals/slice';
 import {memo, useEffect} from 'react';
 import {Project} from './utils/types';
 import {projectsListSelector} from './modules/projectsList/selectors';
-import {deleteProject, getProjectsList} from './modules/projectsList/slice';
 import {loadProject} from './modules/strokes/loadProject';
 import {setStrokes} from './modules/strokes/slice';
+import {fetchProjectsList} from './modules/projectsList/fetchProjectsList';
+import {deleteProject, } from './modules/projectsList/slice';
 
 export const ProjectsModal = memo(function () {
     const dispatch = useDispatch()
     const projectsList = useSelector(projectsListSelector)
 
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(fetchProjectsList())
+    }, [])
+
     const onLoadProject = (projectId: string) => {
-        const projectToLoad = projectsList.projects.find(project => project.id === projectId)
+        const projectToLoad = projectsList.projects.find(project => project._id === projectId)
         if (projectToLoad) {
             const {strokes} = projectToLoad
             dispatch(setStrokes(strokes))
         }
-
-        // dispatch(loadProject(projectId))
+        // @ts-ignore
+        dispatch(loadProject(projectId))
         dispatch(hide())
     }
 
-    // useEffect(() => {
-    //     // @ts-ignore
-    //     dispatch(getProjectsList())
-    // }, [])
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(fetchProjectsList())
+    }, [])
+
     const handleDeleteProject = (id: string) => {
-        const projectsAsString = localStorage.getItem("drawings")
-        if (projectsAsString) {
-            const projects: Project[] = JSON.parse(projectsAsString)
-            const updatedProjects = projects.filter(project => project.id !== id)
-            localStorage.setItem("drawings", JSON.stringify(updatedProjects))
-        }
         dispatch(deleteProject(id))
     }
-    useEffect(() => {
-        const projectsAsString = localStorage.getItem("drawings")
-        if (projectsAsString) {
-            const projects = JSON.parse(projectsAsString)
-            // @ts-ignore
-            dispatch(getProjectsList(projects))
-        }
 
-    }, [])
     return (
         <div className="window modal-panel">
             <div className="title-bar">
@@ -58,17 +51,16 @@ export const ProjectsModal = memo(function () {
             <div className="projects-container">
                 {(projectsList.projects || []).map((project: Project) => {
                     return (
-                        <div
-                            key={project.id}
-                            onClick={() => onLoadProject(project.id)}
-                            className="project-card"
+                        <div key={project._id}
+                             onClick={() => onLoadProject(project._id)}
+                             className="project-card"
                         >
                             <img src={project.image} alt="thumbnail"/>
                             <div className="title">{project.name}</div>
                             <button
                                 aria-label="Close"
                                 className="deleteButton"
-                                onClick={() => handleDeleteProject(project.id)}
+                                onClick={() => handleDeleteProject(project._id)}
                             >
                                 Delete
                             </button>

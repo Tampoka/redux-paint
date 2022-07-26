@@ -11,9 +11,9 @@ export type Stroke = {
 }
 
 export type Project = {
-    image: string;
-    name: string;
-    id: string
+    image: string
+    name: string
+    _id: string
     strokes: Stroke[]
 }
 
@@ -21,7 +21,7 @@ export type RootState = {
     projectsList: {
         projects: Project[]
     };
-    modalVisible: ModalState;
+    modalVisible: ModalState
     currentStroke: Stroke
     strokes: Stroke[]
     historyIndex: number

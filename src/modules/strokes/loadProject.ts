@@ -1,11 +1,11 @@
 import {AppThunk} from '../../store';
-import {getProject} from './api';
 import {setStrokes} from './slice';
+import {drawingsApi} from '../../api/drawings-api';
 
 export const loadProject = (projectId: string): AppThunk => async (dispatch) => {
     try {
-        const {project} = await getProject(projectId)
-        dispatch(setStrokes(project.strokes))
+        const res = await drawingsApi.getDrawing(projectId)
+        dispatch(setStrokes(res.data.strokes))
     } catch (err: any) {
         console.log(err.message)
     }
