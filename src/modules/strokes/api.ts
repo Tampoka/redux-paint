@@ -1,10 +1,10 @@
 import {Stroke} from '../../utils/types';
 
-export const newProject=(
-    name:string,
-    strokes:Stroke[],
-    image:string
-)=>{
+export const addProject = (
+    name: string,
+    strokes: Stroke[],
+    image: string
+) => {
     fetch("http://localhost:4000/projects/new", {
         method: "POST",
         headers: {
@@ -16,10 +16,10 @@ export const newProject=(
             strokes,
             image
         })
-    }).then((res) => res.json())
+    })
+        .then((res) => res.json())
 }
 
 export const getProject = (projectId: string) =>
-    fetch(`http://localhost:4000/projects/${projectId}`).then((res) =>
-        res.json()
-    )
+    fetch(`http://localhost:4000/projects/${projectId}`)
+        .then((res) => res.json())

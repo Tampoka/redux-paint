@@ -1,4 +1,9 @@
-import {Action, configureStore, getDefaultMiddleware, ThunkAction} from '@reduxjs/toolkit';
+import {
+    Action,
+    configureStore,
+    getDefaultMiddleware,
+    ThunkAction
+} from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import historyIndex from './modules/historyIndex/slice';
 import strokes from './modules/strokes/slice';
@@ -17,7 +22,7 @@ export const store = configureStore({
         modalVisible,
         projectsList
     },
-    middleware
+    // middleware
 
 })
 

@@ -51,7 +51,6 @@ const slice = createSlice({
                 const indexToRemove = state.projects.indexOf(projectToRemove)
                 state.projects.splice(indexToRemove, 1)
             }
-
         }
     }
 })

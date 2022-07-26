@@ -19,7 +19,7 @@ const slice = createSlice({
             state.modalName = action.payload
         },
         hide: (state) => {
-            state.isShown = true
+            state.isShown = false
             state.modalName = null
         }
     },

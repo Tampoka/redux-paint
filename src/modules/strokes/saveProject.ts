@@ -1,12 +1,12 @@
 import {AppThunk} from '../../store';
-import {newProject} from './api';
+import {addProject} from './api';
 
 export const saveProject = (
     projectName:string,
     thumbnail:string
 ):AppThunk => async(dispatch,getState)=>{
   try{
-      const response=await newProject(
+      const response=await addProject(
           projectName,
           getState().strokes,
           thumbnail

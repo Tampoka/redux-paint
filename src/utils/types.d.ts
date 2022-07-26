@@ -14,15 +14,15 @@ export type Project = {
     image: string;
     name: string;
     id: string
-    strokes:Stroke[]
+    strokes: Stroke[]
 }
 
 export type RootState = {
     projectsList: {
-        projects:Project[]
+        projects: Project[]
     };
     modalVisible: ModalState;
     currentStroke: Stroke
     strokes: Stroke[]
-    historyIndex:number
+    historyIndex: number
 }

@@ -1,13 +1,13 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {hide} from './modules/modals/slice';
-import {useEffect} from 'react';
+import {memo, useEffect} from 'react';
 import {Project} from './utils/types';
 import {projectsListSelector} from './modules/projectsList/selectors';
 import {deleteProject, getProjectsList} from './modules/projectsList/slice';
 import {loadProject} from './modules/strokes/loadProject';
 import {setStrokes} from './modules/strokes/slice';
 
-export const ProjectsModal = () => {
+export const ProjectsModal = memo(function () {
     const dispatch = useDispatch()
     const projectsList = useSelector(projectsListSelector)
 
@@ -19,7 +19,7 @@ export const ProjectsModal = () => {
         }
 
         // dispatch(loadProject(projectId))
-        // dispatch(hide())
+        dispatch(hide())
     }
 
     // useEffect(() => {
@@ -27,7 +27,6 @@ export const ProjectsModal = () => {
     //     dispatch(getProjectsList())
     // }, [])
     const handleDeleteProject = (id: string) => {
-
         const projectsAsString = localStorage.getItem("drawings")
         if (projectsAsString) {
             const projects: Project[] = JSON.parse(projectsAsString)
@@ -45,7 +44,6 @@ export const ProjectsModal = () => {
         }
 
     }, [])
-
     return (
         <div className="window modal-panel">
             <div className="title-bar">
@@ -80,5 +78,5 @@ export const ProjectsModal = () => {
             </div>
         </div>
     );
-};
+})
 

@@ -1,19 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {endStroke, resetAll} from '../sharedActions';
 
-/*const initialState: RootState["historyIndex"] = 0
-
-export const slice = createReducer(initialState, (builder) => {
-    builder.addCase(undo, (state, action) => {
-        return Math.min(state + 1, action.payload)
-    })
-    builder.addCase(redo, (state, action) => {
-        return Math.max(state - 1, 0)
-    })
-    builder.addCase(endStroke, (state, action) => {
-        return 0
-    })
-})*/
+// const initialState: RootState["historyIndex"] = 0
 
 const historyIndex = createSlice({
     name: "historyIndex",
