@@ -15,7 +15,8 @@ export const drawingsApi = {
         ('/projects/new', {name, strokes, image})
     },
     deleteDrawing(id: string) {
-        return instance.delete<CommonResponseType>(`/projects/${id}`)
+        console.log(`id in deleteDrawing: ${id}`)
+        return instance.delete<string>(`/projects/${id}`)
     }
 }
 
