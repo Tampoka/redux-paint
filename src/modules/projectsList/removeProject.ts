@@ -6,7 +6,6 @@ export const removeProject = (id: string): AppThunk => async (dispatch) => {
     try {
         console.log(`id in removeProject: ${id}`)
         const res = await drawingsApi.deleteDrawing(id)
-        // dispatch(getProjectsListSuccess(res.data))
         dispatch(deleteProject(id))
         console.log(res.data)
     } catch (err: any) {

@@ -5,13 +5,15 @@ import {Project} from './utils/types';
 import {projectsSelector} from './modules/projectsList/selectors';
 import {fetchProjectsList} from './modules/projectsList/fetchProjectsList';
 import {removeProject} from './modules/projectsList/removeProject';
+import {loadProject} from './modules/strokes/loadProject';
+import {setStrokes} from './modules/strokes/slice';
 
 export const ProjectsModal = memo(function () {
     const dispatch = useDispatch()
     const projectsList = useSelector(projectsSelector)
 
-/*    const onLoadProject = (projectId: string) => {
-        const projectToLoad = projectsList.projects.find(project => project._id === projectId)
+    const onLoadProject = (projectId: string) => {
+        const projectToLoad = projectsList.find(project => project._id === projectId)
         if (projectToLoad) {
             const {strokes} = projectToLoad
             dispatch(setStrokes(strokes))
@@ -19,7 +21,7 @@ export const ProjectsModal = memo(function () {
         // @ts-ignore
         dispatch(loadProject(projectId))
         dispatch(hide())
-    }*/
+    }
 
     useEffect(() => {
         // @ts-ignore
@@ -49,7 +51,7 @@ export const ProjectsModal = memo(function () {
                 {(projectsList || []).map((project: Project) => {
                     return (
                         <div key={project._id}
-                             // onClick={() => onLoadProject(project._id)}
+                             onClick={() => onLoadProject(project._id)}
                              className="project-card"
                         >
                             <img src={project.image} alt="thumbnail"/>
