@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/redux-paint/static/css/main.b72920e5.css",
-    "main.js": "/redux-paint/static/js/main.677431f4.js",
+    "main.css": "/redux-paint/static/css/main.6fcf7f50.css",
+    "main.js": "/redux-paint/static/js/main.7cebe5bd.js",
     "static/media/PerfectDOSVGA437Win.woff": "/redux-paint/static/media/PerfectDOSVGA437Win.86368cc9dec15d71c965.woff",
     "static/media/PerfectDOSVGA437Win.woff2": "/redux-paint/static/media/PerfectDOSVGA437Win.7dc718899b215fa16aa7.woff2",
     "static/media/ms_sans_serif.woff": "/redux-paint/static/media/ms_sans_serif.aac84aa6de42b83d1a62.woff",
@@ -9,11 +9,11 @@
     "static/media/ms_sans_serif.woff2": "/redux-paint/static/media/ms_sans_serif.0348082abb503fb6a8c2.woff2",
     "static/media/ms_sans_serif_bold.woff2": "/redux-paint/static/media/ms_sans_serif_bold.7fcf57cc6e87ecddbf64.woff2",
     "index.html": "/redux-paint/index.html",
-    "main.b72920e5.css.map": "/redux-paint/static/css/main.b72920e5.css.map",
-    "main.677431f4.js.map": "/redux-paint/static/js/main.677431f4.js.map"
+    "main.6fcf7f50.css.map": "/redux-paint/static/css/main.6fcf7f50.css.map",
+    "main.7cebe5bd.js.map": "/redux-paint/static/js/main.7cebe5bd.js.map"
   },
   "entrypoints": [
-    "static/css/main.b72920e5.css",
-    "static/js/main.677431f4.js"
+    "static/css/main.6fcf7f50.css",
+    "static/js/main.7cebe5bd.js"
   ]
 }
