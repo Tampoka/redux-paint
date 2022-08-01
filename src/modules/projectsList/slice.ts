@@ -49,7 +49,7 @@ const slice = createSlice({
             }
         })
         builder.addCase(saveProject.fulfilled, (state, action) => {
-            state.projects.unshift({...action.payload.newProject})
+            state.projects.push({...action.payload.newProject})
         })
     }
 })
