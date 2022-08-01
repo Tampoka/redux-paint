@@ -1,5 +1,4 @@
 import {instance} from './config';
-import {AxiosResponse} from 'axios';
 import {Project, Stroke} from '../utils/types';
 import {Optional} from '../utils/sharedTypes';
 

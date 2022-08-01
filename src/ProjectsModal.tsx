@@ -51,10 +51,11 @@ export const ProjectsModal = memo(function () {
                 {(projectsList || []).map((project: Project) => {
                     return (
                         <div key={project._id}
-                             onClick={() => onLoadProject(project._id)}
                              className="project-card"
                         >
-                            <img src={project.image} alt="thumbnail"/>
+                            <img src={project.image}
+                                 alt="thumbnail"
+                                 onClick={() => onLoadProject(project._id)}/>
                             <div className="title">{project.name}</div>
                             <button
                                 aria-label="Close"
