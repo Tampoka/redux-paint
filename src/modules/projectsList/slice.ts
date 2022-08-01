@@ -1,7 +1,10 @@
 import {Project} from '../../utils/types';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {fetchProjectsList} from './fetchProjectsList';
+import {removeProject} from './removeProject';
+import {saveProject} from './saveProject';
 
-type ProjectsListState = {
+export type ProjectsListState = {
     error: string | null
     pending: boolean
     projects: Project[]
@@ -9,7 +12,7 @@ type ProjectsListState = {
 
 const initialState: ProjectsListState = {
     error: null,
-    pending: true,
+    pending: false,
     projects: []
 }
 
@@ -17,49 +20,42 @@ const slice = createSlice({
     name: "projectsList",
     initialState,
     reducers: {
-        getProjectsListSuccess: (
+        setAppStatus: (
             state,
-            action: PayloadAction<Project[]>
+            action: PayloadAction<{ pending: boolean }>
         ) => {
-            state.error = null
-            state.pending = false
-            state.projects = action.payload
+            state.pending = action.payload.pending
         },
-        getProjectsListFailed: (state, action: PayloadAction<string>) => {
-            state.error = action.payload
-            state.pending = false
-            state.projects = []
-        },
-        getProjectsList: (
-            state,
-            action: PayloadAction<Project[]>
-        ) => {
-            state.projects = action.payload
-        },
-        addProject: (
-            state,
-            action: PayloadAction<Project>
-        ) => {
-            state.projects.unshift(action.payload)
-        },
-        deleteProject: (
-            state,
-            action: PayloadAction<string>
-        ) => {
-            const projectToRemove = state.projects.find(project => project._id !== action.payload)
-            if (projectToRemove) {
-                const indexToRemove = state.projects.indexOf(projectToRemove)
-                state.projects.splice(indexToRemove, 1)
-            }
+        /*    getProjectsListSuccess: (
+                state,
+                action: PayloadAction<Project[]>
+            ) => {
+                state.error = null
+                state.pending = false
+                state.projects = action.payload
+            },*/
+        setAppError: (state, action: PayloadAction<{ error: string | null }>) => {
+            state.error = action.payload.error
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchProjectsList.fulfilled, (state, action) => {
+            state.projects = action.payload.projects
+        })
+        builder.addCase(removeProject.fulfilled, (state, action) => {
+            const index = state.projects.findIndex(d => d._id === action.payload.id)
+            if (index > -1) {
+                state.projects.splice(index, 1)
+            }
+        })
+        builder.addCase(saveProject.fulfilled, (state, action) => {
+            state.projects.unshift({...action.payload.newProject})
+        })
     }
 })
 
 export const projectsList = slice.reducer
 export const {
-    getProjectsListFailed,
-    getProjectsListSuccess,
-    getProjectsList,
-    addProject,
-    deleteProject
+    setAppStatus,
+    setAppError
 } = slice.actions

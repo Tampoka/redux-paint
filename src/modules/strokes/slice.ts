@@ -35,7 +35,7 @@ const strokes = createSlice({
                 state.splice(-historyIndex, historyIndex, stroke)
             }
         })
-        builder.addCase(resetAll, (state) => {
+        builder.addCase(resetAll, (_) => {
             return []
         })
     }
