@@ -101,7 +101,8 @@ beforeEach(() => {
             ]
     }
 })
-    test('correct project should be removed', () => {
+describe("projectsList reducer", () => {
+    test('removes correct project', () => {
         const payload = {id: projectId2};
         const endState = projectsList(startState, removeProject.fulfilled(payload, 'requestId', payload))
 
@@ -109,19 +110,24 @@ beforeEach(() => {
         expect(endState.projects[1]._id).toBe(projectId3)
     })
 
-    test('correct project should be added', () => {
+    test('adds project with correct name and thumbnail', () => {
         const newProjectName = "Roadmap"
-        const thumbnail="data:image/png;base64,zzzzzzz"
-        const  payload = {
+        const thumbnail = "data:image/png;base64,zzzzzzz"
+        const payload = {
             newProject: {
                 name: newProjectName,
-                image:"data:image/png;base64,zzzzzzz",
+                image: "data:image/png;base64,zzzzzzz",
                 _id: projectId4,
                 strokes: []
             }
         };
-        const endState = projectsList(startState, saveProject.fulfilled(payload, 'requestId', {projectName:newProjectName,thumbnail}))
+        const endState = projectsList(startState, saveProject.fulfilled(payload, 'requestId', {
+            projectName: newProjectName,
+            thumbnail
+        }))
 
         expect(endState.projects.length).toBe(4)
         expect(endState.projects[3].name).toBe(newProjectName)
     })
+})
+
