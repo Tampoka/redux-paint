@@ -1,19 +1,22 @@
-import {AppThunk} from '../../store';
 import {drawingsApi} from '../../api/drawings-api';
-import {addProject} from './slice';
+import {setAppError, setAppStatus} from './slice';
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import {Stroke} from '../../utils/types';
 
-export const saveProject = (
-    projectName: string,
-    thumbnail: string
-): AppThunk => async (dispatch, getState) => {
+export const saveProject = createAsyncThunk('projects/saveProject', async (param: { projectName: string, thumbnail: string }, {
+    dispatch,
+    getState,
+    rejectWithValue
+}) => {
+    dispatch(setAppStatus({pending: true}))
     try {
-       const res= await drawingsApi.createDrawing(
-            projectName,
-            getState().strokes,
-            thumbnail
-        )
-        await dispatch(addProject(res.data))
+        // const {strokes} = getState() as { strokes: RootState["strokes"] };
+        const {strokes} = getState() as { strokes: Stroke[] };
+        const res = await drawingsApi.createDrawing(param.projectName, strokes, param.thumbnail)
+        dispatch(setAppStatus({pending: false}))
+        return {newProject: res.data.project}
     } catch (err: any) {
-        console.log(err.message)
+        dispatch(setAppError(err.toString()))
+        return rejectWithValue({})
     }
-}
+})

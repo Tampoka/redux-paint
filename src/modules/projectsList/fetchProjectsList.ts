@@ -1,12 +1,18 @@
-import {getProjectsListFailed, getProjectsListSuccess} from './slice';
-import {AppThunk} from '../../store';
+import {setAppError, setAppStatus} from './slice';
 import {drawingsApi} from '../../api/drawings-api';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 
-export const fetchProjectsList = (): AppThunk => async (dispatch) => {
+export const fetchProjectsList = createAsyncThunk('projects/fetchProjects', async (param, {
+    dispatch,
+    rejectWithValue
+}) => {
+    dispatch(setAppStatus({pending: true}))
     try {
         const res = await drawingsApi.getDrawings()
-        dispatch(getProjectsListSuccess(res.data))
+        dispatch(setAppStatus({pending: false}))
+        return {projects: res.data}
     } catch (err: any) {
-        dispatch(getProjectsListFailed(err.toString()))
+        dispatch(setAppError(err.toString()))
+        return rejectWithValue({})
     }
-}
+})

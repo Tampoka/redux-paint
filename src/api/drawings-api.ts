@@ -10,11 +10,10 @@ export const drawingsApi = {
         return instance.get<Project>(`/projects/${id}`)
     },
     createDrawing(name: string, strokes: Stroke[], image: string) {
-        return instance.post<Project>
+        return instance.post<{ project:Project }>
         ('/projects/new', {name, strokes, image})
     },
     deleteDrawing(id: string) {
-        console.log(`id in deleteDrawing: ${id}`)
         return instance.delete<string>(`/projects/${id}`)
     }
 }
