@@ -11,7 +11,7 @@ import {ColorPanel} from './shared/ColorPanel';
 import {EditPanel} from './shared/EditPanel';
 import {beginStroke, updateStroke} from './modules/currentStroke/slice';
 import {ModalLayer} from './ModalLayer';
-import {getProjectsList} from './modules/projectsList/slice';
+import {fetchProjectsList} from './modules/projectsList/fetchProjectsList';
 
 const WIDTH = 1024
 const HEIGHT = 768
@@ -94,16 +94,11 @@ function App() {
         clearCanvas(canvas)
     }, [])
 
-    useEffect(() => {
-        const projectsAsString = localStorage.getItem("drawings")
-        if (projectsAsString) {
-            const projects = JSON.parse(projectsAsString)
-            dispatch(getProjectsList(projects))
-        } else {
-            localStorage.setItem("drawings", "[]")
-        }
 
-    }, [])
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(fetchProjectsList())
+    }, [dispatch])
 
     return (
         <div className="window">

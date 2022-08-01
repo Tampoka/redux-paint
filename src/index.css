@@ -118,3 +118,11 @@ canvas {
     overflow: hidden;
 }
 
+.loading-message{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+

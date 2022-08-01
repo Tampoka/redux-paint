@@ -1,4 +1,5 @@
 import {ModalState} from '../modules/modals/slice';
+import {ProjectsListState} from '../modules/projectsList/slice';
 
 export type Point = {
     x: number
@@ -18,9 +19,7 @@ export type Project = {
 }
 
 export type RootState = {
-    projectsList: {
-        projects: Project[]
-    };
+    projectsList: ProjectsListState
     modalVisible: ModalState
     currentStroke: Stroke
     strokes: Stroke[]

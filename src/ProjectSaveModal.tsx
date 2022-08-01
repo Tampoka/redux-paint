@@ -23,7 +23,7 @@ export const ProjectSaveModal = () => {
         }
         const thumbnail = await getBase64Thumbnail({file, scale: 0.1})
         // @ts-ignore
-        dispatch(saveProject(projectName, thumbnail))
+        dispatch(saveProject({projectName, thumbnail}))
         setProjectName("")
         dispatch(hide())
     }
