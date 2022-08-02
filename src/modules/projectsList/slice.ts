@@ -3,9 +3,10 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {fetchProjectsList} from './fetchProjectsList';
 import {removeProject} from './removeProject';
 import {saveProject} from './saveProject';
+import {Optional} from '../../utils/sharedTypes';
 
 export type ProjectsListState = {
-    error: string | null
+    error: Optional<string>
     pending: boolean
     projects: Project[]
 }

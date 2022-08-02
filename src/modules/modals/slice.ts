@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import {Optional} from '../../utils/sharedTypes';
 
 export type ModalState = {
     isShown: boolean
-    modalName: string | null
+    modalName: Optional<string>
 }
 
 const initialState: ModalState = {
