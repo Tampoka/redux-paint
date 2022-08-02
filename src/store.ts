@@ -5,12 +5,12 @@ import {
     ThunkAction
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import historyIndex from './modules/historyIndex/slice';
-import strokes from './modules/strokes/slice';
 import {currentStroke} from './modules/currentStroke/slice';
 import {modalVisible} from './modules/modals/slice'
 import {RootState} from './utils/types';
 import {projectsList} from './modules/projectsList/slice';
+import {historyIndex} from './modules/historyIndex/slice';
+import {strokes} from './modules/strokes/slice';
 
 
 const middleware = [...getDefaultMiddleware(), logger]
@@ -22,7 +22,7 @@ export const store = configureStore({
         modalVisible,
         projectsList
     },
-    // middleware
+    middleware
 
 })
 

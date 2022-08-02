@@ -4,7 +4,7 @@ import {endStroke, resetAll} from '../sharedActions';
 
 const initialStrokes: RootState["strokes"] = []
 
-const strokes = createSlice({
+const slice = createSlice({
     name: "strokes",
     initialState: initialStrokes,
     reducers: {
@@ -27,6 +27,6 @@ const strokes = createSlice({
     }
 })
 
-export default strokes.reducer
-export const {setStrokes} = strokes.actions
+export const strokes=slice.reducer
+export const {setStrokes} = slice.actions
 

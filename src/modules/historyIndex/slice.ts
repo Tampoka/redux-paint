@@ -3,7 +3,7 @@ import {endStroke, resetAll} from '../sharedActions';
 
 // const initialState: RootState["historyIndex"] = 0
 
-const historyIndex = createSlice({
+ const slice = createSlice({
     name: "historyIndex",
     initialState: 0,
     reducers: {
@@ -24,5 +24,6 @@ const historyIndex = createSlice({
     }
 })
 
-export default historyIndex.reducer
-export const {undo, redo} = historyIndex.actions
+export const historyIndex=slice.reducer
+export const {undo, redo} = slice.actions
+
