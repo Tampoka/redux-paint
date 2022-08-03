@@ -4,7 +4,6 @@ import {memo} from 'react';
 import {Project, RootState} from './utils/types';
 import {projectsSelector} from './modules/projectsList/selectors';
 import {removeProject} from './modules/projectsList/removeProject';
-import {loadProject} from './modules/strokes/loadProject';
 import {setStrokes} from './modules/strokes/slice';
 
 export const ProjectsModal = memo(function () {
