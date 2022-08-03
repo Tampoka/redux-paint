@@ -1,12 +1,11 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {hide} from './modules/modals/slice';
-import {memo, useEffect} from 'react';
+import {memo} from 'react';
 import {Project, RootState} from './utils/types';
 import {projectsSelector} from './modules/projectsList/selectors';
 import {removeProject} from './modules/projectsList/removeProject';
 import {loadProject} from './modules/strokes/loadProject';
 import {setStrokes} from './modules/strokes/slice';
-import {fetchProjectsList} from './modules/projectsList/fetchProjectsList';
 
 export const ProjectsModal = memo(function () {
     const dispatch = useDispatch()
@@ -19,8 +18,6 @@ export const ProjectsModal = memo(function () {
             const {strokes} = projectToLoad
             dispatch(setStrokes(strokes))
         }
-        // @ts-ignore
-        dispatch(loadProject(projectId))
         dispatch(hide())
     }
 
